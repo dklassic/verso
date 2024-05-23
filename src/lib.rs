@@ -8,14 +8,18 @@
 pub mod app;
 /// Error and result types.
 pub mod errors;
+/// Utilities to paint custom shaders.
+pub mod painter;
 /// Utilities to read options and preferences.
 pub mod prefs;
 /// Utilities to access resource files
 pub mod resources;
 /// Utilities to write tests.
-pub mod test;
-/// Web view types to handle web browsing contexts and window.
+// pub mod test;
+/// Web view types to handle web browsing contexts.
 pub mod webview;
+/// Verso's window types to handle Winit's window.
+pub mod window;
 
 pub use app::{Status, Verso};
 pub use errors::{Error, Result};
