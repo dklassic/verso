@@ -21,10 +21,10 @@ void main() {
     float alpha = length(max(abs(uv - boxPos) - boxBnd, 0.0)) - radius;
     if(alpha > 0.0)
     {
-        final_color = vec4(1, 1, 1, 0);
+        final_color = vec4(0, 0, 0, 0);
     }
     else
     {
-        final_color = vec4(0, 0, 0, 1);
+        final_color = vec4(1, 1, 1, 1);
     }
 }

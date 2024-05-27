@@ -344,9 +344,8 @@ impl Window {
                 gl::COLOR_BUFFER_BIT,
                 gl::NEAREST,
             );
-            // webrender_gl.bind_framebuffer(gl::FRAMEBUFFER, fbo);
             webrender_gl.enable(gl::BLEND);
-            webrender_gl.blend_func_separate(gl::ZERO, gl::ONE, gl::ONE, gl::ZERO);
+            webrender_gl.blend_func_separate(gl::DST_COLOR, gl::ZERO, gl::ONE, gl::ZERO);
             self.painter.draw();
             webrender_gl.disable(gl::BLEND);
 
