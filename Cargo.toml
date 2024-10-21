@@ -94,8 +94,8 @@ webgpu = { git = "https://github.com/servo/servo.git", rev = "4d11b2d" }
 # Servo org crates
 servo-media = { git = "https://github.com/servo/media" }
 servo-media-dummy = { git = "https://github.com/servo/media" }
-style = { git = "https://github.com/servo/stylo", branch = "2024-09-02", features = ["servo"] }
-style_traits = { git = "https://github.com/servo/stylo", branch = "2024-09-02", features = ["servo"] }
+style = { git = "https://github.com/servo/stylo", branch = "2024-10-04", features = ["servo"] }
+style_traits = { git = "https://github.com/servo/stylo", branch = "2024-10-04", features = ["servo"] }
 webrender = { git = "https://github.com/servo/webrender", branch = "0.65", features = ["capture"] }
 webrender_api = { git = "https://github.com/servo/webrender", branch = "0.65" }
 webxr = { git = "https://github.com/servo/webxr", features = ["headless"] }
