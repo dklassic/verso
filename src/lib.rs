@@ -31,3 +31,5 @@ pub use verso::Verso;
 pub use winit;
 /// Window tabs manager
 pub mod tab;
+/// Bookmark manager
+pub mod bookmark;

@@ -1229,7 +1229,8 @@ impl IOCompositor {
 
         let rect = DeviceIntRect::from_size(size);
         let show_tab_bar = window.tab_manager.count() > 1;
-        let content_size = window.get_content_size(rect, show_tab_bar);
+        let show_bookmark_bar = window.bookmark_manager.count() > 0;
+        let content_size = window.get_content_size(rect, show_tab_bar, show_bookmark_bar);
         if let Some(tab_id) = window.tab_manager.current_tab_id() {
             let (tab_id, prompt_id) = window.tab_manager.set_size(tab_id, content_size);
             if let Some(tab_id) = tab_id {

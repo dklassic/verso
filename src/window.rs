@@ -37,6 +37,7 @@ use winit::{
 };
 
 use crate::{
+    bookmark::BookmarkManager,
     compositor::{IOCompositor, MouseWindowEvent},
     keyboard::keyboard_event_from_winit,
     rendering::{gl_config_picker, RenderingContext},
@@ -53,6 +54,7 @@ use arboard::Clipboard;
 
 const PANEL_HEIGHT: f64 = 50.0;
 const TAB_HEIGHT: f64 = 30.0;
+const BOOKMARK_HEIGHT: f64 = 30.0;
 const PANEL_PADDING: f64 = 4.0;
 
 /// A Verso window is a Winit window containing several web views.
@@ -80,6 +82,7 @@ pub struct Window {
     menu_event_receiver: MenuEventReceiver,
     /// Window tabs manager
     pub(crate) tab_manager: TabManager,
+    pub(crate) bookmark_manager: BookmarkManager,
 }
 
 impl Window {
@@ -132,6 +135,7 @@ impl Window {
                 #[cfg(any(target_os = "macos", target_os = "windows"))]
                 menu_event_receiver: MenuEvent::receiver().clone(),
                 tab_manager: TabManager::new(),
+                bookmark_manager: BookmarkManager::new(),
             },
             rendering_context,
         )
@@ -174,19 +178,28 @@ impl Window {
             #[cfg(any(target_os = "macos", target_os = "windows"))]
             menu_event_receiver: MenuEvent::receiver().clone(),
             tab_manager: TabManager::new(),
+            bookmark_manager: BookmarkManager::new(),
         };
         compositor.swap_current_window(&mut window);
         window
     }
 
     /// Get the content area size for the webview to draw on
-    pub fn get_content_size(&self, mut size: DeviceIntRect, include_tab: bool) -> DeviceIntRect {
+    pub fn get_content_size(
+        &self,
+        mut size: DeviceIntRect,
+        include_tab: bool,
+        include_bookmark: bool,
+    ) -> DeviceIntRect {
         if self.panel.is_some() {
-            let height: f64 = if include_tab {
-                (PANEL_HEIGHT + TAB_HEIGHT + PANEL_PADDING) * self.scale_factor()
-            } else {
-                (PANEL_HEIGHT + PANEL_PADDING) * self.scale_factor()
-            };
+            let mut height: f64 = PANEL_HEIGHT;
+            if include_tab {
+                height += TAB_HEIGHT;
+            }
+            if include_bookmark {
+                height += BOOKMARK_HEIGHT;
+            }
+            height *= self.scale_factor();
             size.min.y = size.max.y.min(height as i32);
             size.min.x += 10;
             size.max.y -= 10;
